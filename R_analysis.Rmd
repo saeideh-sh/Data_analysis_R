@@ -3,11 +3,11 @@ title: "Red Wine Quality"
 author: "Saeideh Shahrokh Esfahani"
 date: "4/17/2017"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
 
-```{r setup, warning=FALSE}
+```{r setup, warning=FALSE, message= FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -34,6 +34,9 @@ library(RColorBrewer)
 library(memisc)
 library(plyr)
 library(GGally)
+library(extrafont)
+#font_import()
+#loadfonts(device = "win")
 
 ```
 
@@ -577,19 +580,18 @@ Therefor, I assume that the different features may have their impact for having 
 
 ### Plot One
 ```{r echo=FALSE, warning=FALSE,Plot_One,message=FALSE}
+#tikz(file = outputFile, width=11.692, height=8.267)
 ggplot(data = rwine, aes(x=alcohol)) + 
   geom_density(mapping = NULL, data = NULL, stat = "density",
   position = "identity", color = "darkred", fill = "white") +
-
-  facet_wrap(~quality1, ncol= 2)+ 
-  #theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"))+
+ facet_wrap(~quality1, ncol= 2)+ 
   theme(axis.line=element_line()) + 
     scale_x_continuous(limits=c(0,20)) + scale_y_continuous(limits=c(0,1))+
   labs(x="Alcohole %" , y="Density")+
   ggtitle("Change of Alcohole % of Red Wine for Different Qualities")+
-  theme(plot.title = element_text(family = "Trebuchet MS", color="#666666", face="bold", size=14, hjust=0)) +
-  theme(axis.title = element_text(family = "Trebuchet MS", color="#666666", face="bold", size=11)) 
-
+  theme(plot.title = element_text( color="#666666",face="bold", size=14, hjust=0)) +
+  theme(axis.title = element_text( color="#666666",face="bold", size=11)) 
+##family = "Trebuchet MS", color="#666666",
 ```
 
 ### Description One
@@ -605,8 +607,8 @@ panel.background = element_blank(),
 axis.line = element_line(colour = "black"))+
   labs(x="pH" , y="Volatile Acidity (g/dm^3)")+
   ggtitle("Relationship between Volatile Acidity and pH")+
-  theme(plot.title = element_text(family = "Trebuchet MS", color="#666666", face="bold", size=14, hjust=0)) +
-  theme(axis.title = element_text(family = "Trebuchet MS", color="#666666", face="bold", size=11)) 
+  theme(plot.title = element_text( color="#666666", face="bold", size=14, hjust=0)) +
+  theme(axis.title = element_text( color="#666666", face="bold", size=11)) 
 
 
 ```
@@ -632,10 +634,8 @@ ggplot(aes(x= unpleasant.wine, y = alcohol1,color = factor(quality)),
                       ,reverse=T,override.aes=list(alpha = 1, size = 2))) +
   labs(x ="Unpleasent red wine",y="Alcohol % ") +
 ggtitle( "Alcohol % and Wine Pleasent Degree, Colored by Red Wine Quality") +
-  theme(plot.title = element_text(family = "Trebuchet MS",
-                                  color="#666666", face="bold", size=14, hjust=0)) +
-  theme(axis.title = element_text(family = "Trebuchet MS"
-                                  , color="#666666", face="bold", size=11)) 
+  theme(plot.title = element_text(color="#666666", face="bold", size=14, hjust=0)) +
+  theme(axis.title = element_text( color="#666666", face="bold", size=11)) 
 
 
 ```
